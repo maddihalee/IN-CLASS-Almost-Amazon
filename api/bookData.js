@@ -1,7 +1,7 @@
-// import client from '../utils/client';
+import client from '../utils/client';
 // API CALLS FOR BOOKS
 
-// const endpoint = client.databaseURL;
+const endpoint = client.databaseURL;
 
 // TODO: GET BOOKS
 const getBooks = () => new Promise((resolve, reject) => {
@@ -17,7 +17,7 @@ const getBooks = () => new Promise((resolve, reject) => {
 });
 
 // TODO: DELETE BOOK
-const deleteBook = () => new Promise((resolve, reject) => {
+const deleteBook = (firebaseKey) => new Promise((resolve, reject) => {
   fetch(`${endpoint}/books/${firebaseKey}.json`, {
     method: 'DELETE',
     headers: {
@@ -30,7 +30,17 @@ const deleteBook = () => new Promise((resolve, reject) => {
 });
 
 // TODO: GET SINGLE BOOK
-const getSingleBook = () => {};
+const getSingleBook = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="sale"&equalTo=true`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // TODO: CREATE BOOK
 const createBook = () => {};
@@ -39,7 +49,17 @@ const createBook = () => {};
 const updateBook = () => {};
 
 // TODO: FILTER BOOKS ON SALE
-const booksOnSale = () => {};
+const booksOnSale = () => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/books.json?orderBy="sale"&equalTo=true`, {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((response) => response.json())
+    .then((data) => resolve(Object.values(data)))
+    .catch(reject);
+});
 
 // TODO: STRETCH...SEARCH BOOKS
 
