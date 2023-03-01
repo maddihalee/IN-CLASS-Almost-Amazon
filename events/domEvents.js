@@ -23,7 +23,7 @@ const domEvents = (user) => {
 
     // TODO: CLICK EVENT FOR SHOWING FORM FOR ADDING A BOOK
     if (e.target.id.includes('add-book-btn')) {
-      addBookForm();
+      addBookForm(user);
     }
 
     // TODO: CLICK EVENT EDITING/UPDATING A BOOK
@@ -48,7 +48,7 @@ const domEvents = (user) => {
         const [, firebaseKey] = e.target.id.split('--');
 
         deleteAuthorBooksRelationship(firebaseKey).then(() => {
-          getAuthors().then(showAuthors);
+          getAuthors(user.uid).then(showAuthors);
         });
       }
     }
