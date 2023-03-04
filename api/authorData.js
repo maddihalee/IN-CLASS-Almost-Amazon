@@ -90,8 +90,8 @@ const getAuthorBooks = (firebaseKey) => new Promise((resolve, reject) => {
 });
 
 // TODO: FILTER FAVORITE AUTHORS
-const favoriteAuthors = () => new Promise((resolve, reject) => {
-  fetch(`${endpoint}/authors.json?orderBy="favorite"&equalTo=true`, {
+const favoriteAuthors = (uid) => new Promise((resolve, reject) => {
+  fetch(`${endpoint}/authors.json?orderBy="uid"&equalTo="${uid}"`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
